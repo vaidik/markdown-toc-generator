@@ -1,9 +1,9 @@
 FROM haskell
 
-COPY . /toc-master
-WORKDIR /toc-master
+COPY . /opt/markdown-toc-generator
+WORKDIR /opt/markdown-toc-generator
 
 RUN stack setup
 RUN stack build
 
-RUN rm -rf /toc-master
+RUN rm -rf /opt/markdown-toc-generator
