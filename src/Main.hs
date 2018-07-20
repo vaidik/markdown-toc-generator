@@ -27,9 +27,6 @@ filterHeadings = filter $ isHeading . getType
 getText :: Node -> Text
 getText (Node _ (TEXT s) _) = s
 
-makeList :: [Node] -> Node
-makeList n = Node Nothing (LIST (ListAttributes {listType = ORDERED_LIST, listTight = True, listStart = 1, listDelim = PERIOD_DELIM})) (map (`makeNode` Nothing) n)
-
 makeNode :: Node -> Maybe Node -> Node
 makeNode (Node _ t c) Nothing = Node Nothing ITEM [Node Nothing PARAGRAPH [Node Nothing (TEXT (getText (head c))) []]]
 makeNode (Node _ t c) n = Node Nothing ITEM [Node Nothing PARAGRAPH [Node Nothing (TEXT (getText (head c))) []], fromJust n]
