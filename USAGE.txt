@@ -1,0 +1,2 @@
+Usage:
+  markdown-toc-generator <file>

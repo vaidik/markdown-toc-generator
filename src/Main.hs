@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE QuasiQuotes #-}
 
 module Main where
 
@@ -6,6 +7,8 @@ import CMark
 import Data.Text (pack, unpack)
 import Data.Text.Internal (Text)
 import Data.Maybe (fromJust)
+import System.Environment (getArgs)
+import System.Console.Docopt
 
 getType :: Node -> NodeType
 getType (Node _ t _) = t
@@ -55,8 +58,17 @@ makeList' (x:y:xs)
 makeListNode :: [Node] -> Node
 makeListNode = Node Nothing (LIST (ListAttributes {listType = ORDERED_LIST, listTight = True, listStart = 1, listDelim = PERIOD_DELIM}))
 
+patterns :: Docopt
+patterns = [docoptFile|USAGE.txt|]
+
+getArgOrExit = getArgOrExitWith patterns
+
 main :: IO ()
 main = do
-  md <- readFile "README.test.md"
+  args <- parseArgsOrExit patterns =<< getArgs
+
+  file <- args `getArgOrExit` (argument "file")
+
+  md <- readFile file
   let mdNodes = getChildren (commonmarkToNode [] (pack md))
   putStrLn (unpack (nodeToCommonmark [] Nothing (makeListNode (makeList' (filterHeadings mdNodes)))))
