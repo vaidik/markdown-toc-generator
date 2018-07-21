@@ -1,0 +1,10 @@
+language: generic
+
+services:
+  - docker
+
+before_script:
+  - docker build . -t markdown-toc-generator:dev
+
+script:
+  - docker run -v "$(pwd)":/opt/markdown-toc-generator markdown-toc-generator:dev hlint src/
