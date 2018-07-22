@@ -1,2 +1,11 @@
 Usage:
-  markdown-toc-generator <file>
+  markdown-toc-generator [--with-heading] [--no-first-h1] [--bullets] [--append=<ending-markdown>] [--write] <file>
+
+Options:
+  -h, --with-heading        Add heading for the generated TOC
+  -a, --append=<markdown>   Append a string at the end of the TOC
+  -n, --no-first-h1         Exclude the first h1-level heading in a file
+  -b, --bullets             Use bullets instead of ordered list
+  -w, --write               Write TOC in the beginning of the markdown file
+                            instead of printing on the console (default
+                            behaviour).
