@@ -2,10 +2,11 @@
 
 <!-- TOC -->
 
-1.  Installation
+1.  Usage
+2.  Installation
     1.  Download Binary
     2.  Build from source
-2.  Development
+3.  Development
 
 **Note:** this TOC is generated using markdown-toc-generator.
 
