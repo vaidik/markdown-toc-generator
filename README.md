@@ -11,6 +11,14 @@
 
 <!-- TOC END -->
 
+## Usage
+
+Checkout USAGE.txt for the latest instructions
+
+or
+
+Run `markdown-toc-generator --h`
+
 ## Installation
 
 ### Download Binary
@@ -24,11 +32,11 @@ Head over to the Releases page to donwload the latest release.
   - Docker (preferrably)
   - Stack and GHC (if not Docker)
 
-<!-- end list -->
+Execute to following commands to setup the environment:
 
     git clone git@github.com:vaidik/markdown-toc-generator.git
     cd markdown-toc-generator
-    docker build .
+    docker build . -t markdown-toc-generator:dev
     docker run -it -v "$(pwd)":/opt/markdown-toc-generator markdown-toc-generator:dev bash
 
 Inside the container started as the result of the last command, run the following
