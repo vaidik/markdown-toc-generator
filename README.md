@@ -1,11 +1,14 @@
 # markdown-toc-generator
 
+[![Build Status](https://travis-ci.org/vaidik/markdown-toc-generator.svg?branch=master)](https://travis-ci.org/vaidik/markdown-toc-generator)
+
+Builds Table of Contents for a given markdown file.
+
 <!-- TOC -->
 
 1.  Usage
 2.  Installation
-    1.  Download Binary
-    2.  Build from source
+    1.  Build from source
 3.  Development
 
 **Note:** this TOC is generated using markdown-toc-generator.
@@ -14,38 +17,37 @@
 
 ## Usage
 
-Checkout USAGE.txt for the latest instructions
+CLI options:
 
-or
+    Usage:
+      markdown-toc-generator [--with-heading] [--no-first-h1] [--bullets] [--append=<ending-markdown>] [--write] <file>
 
-Run `markdown-toc-generator --h`
+    Options:
+      -h, --with-heading        Add heading for the generated TOC
+      -a, --append=<markdown>   Append a string at the end of the TOC
+      -n, --no-first-h1         Exclude the first h1-level heading in a file
+      -b, --bullets             Use bullets instead of ordered list
+      -w, --write               Write TOC in the beginning of the markdown file
+                                instead of printing on the console (default
+                                behaviour).
 
 ## Installation
 
-### Download Binary
-
-Head over to the Releases page to donwload the latest release.
+As of now, downloadable binaries are not available. So build from source.
 
 ### Build from source
 
 **Requirements:**
 
-  - Docker (preferrably)
   - Stack and GHC (if not Docker)
 
 Execute to following commands to setup the environment:
 
     git clone git@github.com:vaidik/markdown-toc-generator.git
     cd markdown-toc-generator
-    docker build . -t markdown-toc-generator:dev
-    docker run -it -v "$(pwd)":/opt/markdown-toc-generator markdown-toc-generator:dev bash
+    stack build --copy-bins
 
-Inside the container started as the result of the last command, run the following
-command:
-
-    stack build
-
-And start using the binary.
+After this, you will find the binary `markdown-toc-generator` in your `PATH`.
 
 ## Development
 
