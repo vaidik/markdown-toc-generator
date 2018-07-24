@@ -6,10 +6,10 @@ Builds Table of Contents for a given markdown file.
 
 <!-- TOC -->
 
-1.  Usage
-2.  Installation
-    1.  Build from source
-3.  Development
+1.  [Usage](#usage "Usage")
+2.  [Installation](#installation "Installation")
+    1.  [Build from source](#build-from-source "Build from source")
+3.  [Development](#development "Development")
 
 **Note:** this TOC is generated using markdown-toc-generator.
 
