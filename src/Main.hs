@@ -4,7 +4,7 @@
 module Main where
 
 import CMark
-import Data.Text (pack, unpack)
+import Data.Text (pack, strip, toLower, unpack)
 import Data.Text.Internal (Text)
 import Data.Maybe (fromJust, isJust, maybeToList)
 import System.Environment (getArgs)
@@ -50,9 +50,21 @@ getText _ = error "Unexpected node. Works only with HEADING or TEXT nodes."
 makeTextNode :: Text -> Node
 makeTextNode s = Node Nothing (TEXT s) []
 
+removePunc :: String -> String
+removePunc = filter (not . (`elem` (",.?!-:;\"\'" :: String)))
+
+replaceChar :: Char -> Char -> String -> String
+replaceChar o n xs = [ if x == o then n else x | x <- xs ]
+
+makeLinkNode :: Text -> Node
+makeLinkNode t = Node Nothing (LINK u t)
+    [ makeTextNode t ]
+  where u = pack ('#' : (replaceChar ' ' '-' . removePunc) (unpack (toLower . strip $ t)))
+
 makeNode :: Node -> Maybe Node -> Node
 makeNode (Node _ _ c) n = Node Nothing ITEM
-  (Node Nothing PARAGRAPH [ makeTextNode (getText (head c)) ] : maybeToList n)
+    (Node Nothing PARAGRAPH [ makeLinkNode t ] : maybeToList n)
+  where t = getText (head c)
 
 slice :: [Node] -> Int -> [Node]
 slice [] l = []
